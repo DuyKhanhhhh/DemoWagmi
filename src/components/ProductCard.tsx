@@ -2,8 +2,14 @@ import React from 'react';
 import { PayButton } from './PayButton';
 import "../css/BoxProduct.css"
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { useDispatch } from 'react-redux';
+import { addToCart } from '@/redux/Slices/CartSlice';
 const ProductCard = ({ product, chainId }) => {
+    const dispatch = useDispatch();
 
+    const handleAddToCart = () => {
+        dispatch(addToCart(product));
+    }
     return (
         <>
             <div className='col-6 col-md-4 mb-4'>
@@ -13,7 +19,7 @@ const ProductCard = ({ product, chainId }) => {
                     </div>
                     <div className='name'>{product.product}</div>
                     <div className='price'>${product.price}</div>
-                    <PayButton price={product.price} chainId={chainId} />
+                    <button className='btn btn-success' onClick={handleAddToCart}>AddToCart</button>
                 </div>
             </div >
         </>
